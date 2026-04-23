@@ -19,26 +19,6 @@ function slugify($text) {
 }
 
 /**
- * Dinamik SEO URL oluşturucu
- */
-function get_bolge_url($il_slug, $ilce_slug = '', $mahalle_slug = '', $marka_slug = '') {
-    $base = rtrim(SITE_URL, '/');
-    if ($marka_slug) {
-        $url = $base . '/' . slugify($marka_slug) . '-vrf/' . $il_slug;
-    } else {
-        $url = $base . '/vrf-klima/' . $il_slug;
-    }
-    
-    if ($ilce_slug) {
-        $url .= '/' . $ilce_slug;
-        if ($mahalle_slug) {
-            $url .= '/' . $mahalle_slug;
-        }
-    }
-    return $url;
-}
-
-/**
  * Dinamik sayfa, blog, ürün URL oluşturucu
  */
 function get_page_url($type, $slug = '') {
@@ -127,73 +107,11 @@ function render_meta($title, $description, $canonical = '', $keywords = '') {
     }
 }
 
-/**
- * Hizmet bölgelerini getir (turkey.php'den)
- */
-function get_service_regions() {
-    return ['istanbul', 'kocaeli', 'sakarya', 'yalova'];
-}
-
-/**
- * İl verisi getir
- */
-function get_il_data($il_slug) {
-    global $turkey_data;
-    if (empty($turkey_data)) {
-        require_once __DIR__ . '/../turkey.php';
-    }
-    if (isset($turkey_data[$il_slug])) {
-        return $turkey_data[$il_slug];
-    }
-    return null;
-}
-
-/**
- * İlçe verisi getir
- */
-function get_ilce_data($il_slug, $ilce_slug) {
-    $il = get_il_data($il_slug);
-    if ($il && isset($il['ilceler'][$ilce_slug])) {
-        return $il['ilceler'][$ilce_slug];
-    }
-    return null;
-}
-
-/**
- * Bu ilçe SEO ve hizmet odağında mı? (OSB ve Çevre ilçeler)
- */
-function is_odak_ilce($ilce_slug) {
-    $odaklar = [
-        'pendik', 'tuzla', 'kartal', 'maltepe', 'sultanbeyli', 'sancaktepe',
-        'gebze', 'dilovasi', 'cayirova', 'kartepe', 'izmit', 'basiskele',
-        'arifiye', 'hendek', 'sogutlu', 'karasu', 'adapazari', 'erenler',
-        'altinova', 'ciftlikkoy'
-    ];
-    return in_array($ilce_slug, $odaklar);
-}
-
-/**
- * Tüm hizmet illlerini getir
- */
-function get_all_service_iller() {
-    global $turkey_data;
-    if (empty($turkey_data)) {
-        require_once __DIR__ . '/../turkey.php';
-    }
-    $iller = [];
-    $service_slugs = get_service_regions();
-    foreach ($service_slugs as $slug) {
-        if (isset($turkey_data[$slug])) {
-            $iller[$slug] = $turkey_data[$slug];
-        }
-    }
-    return $iller;
-}
 
 /**
  * Lead capture form
  */
-function render_lead_form($title = 'Ücretsiz Keşif ve Teklif Al', $subnet = 'Projeniz için 24 saat içinde ücretsiz kapasite ön raporu.', $location = '') {
+function render_lead_form($title = 'Toptan Sipariş Teklif Al', $subnet = 'Fiyat listesi ve sipariş onayı için dakikalar içinde dönüş yapıyoruz.', $location = '') {
     ?>
     <div class="contact-form-card" style="position:sticky;top:100px;">
         <h3><?= $title ?></h3>
@@ -207,25 +125,24 @@ function render_lead_form($title = 'Ücretsiz Keşif ve Teklif Al', $subnet = 'P
                 <input type="text" class="input-control" name="ad_soyad" placeholder="Adınız Soyadınız" required>
             </div>
             <div class="input-group">
-                <label>PROJE TİPİ</label>
-                <select class="input-control" name="proje_tipi">
-                    <option>Fabrika / Üretim Tesisi</option>
-                    <option>Otel / Turizm</option>
-                    <option>Plaza / Ofis</option>
-                    <option>AVM / Mağaza</option>
-                    <option>Villa / Rezidans</option>
-                    <option>Hastane / Sağlık</option>
-                    <option>Okul / Eğitim</option>
+                <label>MÜŞTERİ TİPİ</label>
+                <select class="input-control" name="musteri_tipi">
+                    <option>Kafe / Restoran</option>
+                    <option>Otel / Pansiyon</option>
+                    <option>Market / Pastane</option>
+                    <option>Kurumsal Firma</option>
+                    <option>Düğün / Organizasyon</option>
+                    <option>Bireysel</option>
                     <option>Diğer</option>
                 </select>
             </div>
             <div class="input-group">
-                <label>ALAN (M²)</label>
-                <input type="number" class="input-control" name="alan" placeholder="Örn: 1500">
+                <label>ÜRÜN / ÇEŞİT</label>
+                <input type="text" class="input-control" name="urun" placeholder="Örn: Fıstıklı Baklava">
             </div>
             <div class="input-group">
-                <label>TAHMİNİ ALAN (M²)</label>
-                <input type="number" class="input-control" name="alan" placeholder="Örn: 2500">
+                <label>TAHMİNİ MİKTAR</label>
+                <input type="text" class="input-control" name="miktar" placeholder="Örn: 10 kg veya 5 tepsi">
             </div>
             <div class="input-group">
                 <label>TELEFON *</label>
@@ -234,7 +151,7 @@ function render_lead_form($title = 'Ücretsiz Keşif ve Teklif Al', $subnet = 'P
             <button type="submit" class="btn-primary btn-full" style="margin-top:10px;">WHATSAPP İLE GÖNDER</button>
         </form>
         <div class="lead-form-wa">
-            <a href="<?= SITE_WHATSAPP_LINK ?>" class="btn-whatsapp"><span class="material-symbols-outlined">chat</span>WhatsApp Danışma</a>
+            <a href="<?= SITE_WHATSAPP_LINK ?>" class="btn-whatsapp"><span class="material-symbols-outlined">chat</span>WhatsApp'tan Yaz</a>
         </div>
     </div>
     <?php
@@ -253,99 +170,18 @@ function render_section_header($title, $subtitle = '', $center = false) {
 }
 
 /**
- * Alt kısım bölge listesi SEO eklentisi
+ * Alt kısım kategori listesi (SEO iç link silosu)
  */
 function render_bottom_regions() {
-    $iller = get_all_service_iller();
+    $cats = get_product_categories();
     echo '<section style="padding:60px 0;background:var(--bg-section);border-top:1px solid #E2E8F0;">';
     echo '<div class="container">';
-    echo '<h2 style="font-size:1.75rem;color:var(--primary);margin-bottom:32px;text-align:center;">Hizmet Bölgelerimiz</h2>';
-    echo '<div class="grid-12" style="gap:24px;">';
-    foreach ($iller as $il_slug => $il_data) {
-        echo '<div style="grid-column:span 3;">';
-        echo '<h3 style="font-size:1.2rem;margin-bottom:16px;"><a href="'.get_bolge_url($il_slug).'" style="color:var(--primary);">'.$il_data['name'].' VRF Klima</a></h3>';
-        echo '<ul style="list-style:none;padding:0;margin:0;">';
-        foreach ($il_data['ilceler'] as $ilce_slug => $ilce_data) {
-            echo '<li style="margin-bottom:8px;"><a href="'.get_bolge_url($il_slug, $ilce_slug).'" style="color:#718096;text-decoration:none;font-size:0.95rem;">› '.$ilce_data['name'].'</a></li>';
-        }
-        echo '</ul>';
-        echo '</div>';
+    echo '<h2 style="font-size:1.75rem;color:var(--primary);margin-bottom:32px;text-align:center;">Tüm Baklava Kategorileri</h2>';
+    echo '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">';
+    foreach ($cats as $cs => $c) {
+        $count = count(get_products($cs));
+        echo '<a href="'.get_page_url('sayfa','urunler').'?kategori='.$cs.'" style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #E2E8F0;padding:10px 18px;border-radius:30px;color:#2D3748;text-decoration:none;font-weight:600;font-size:.92rem;"><span class="material-symbols-outlined" style="font-size:18px;">'.$c['icon'].'</span>'.$c['name'].' <span style="opacity:.6;font-weight:400;">('.$count.')</span></a>';
     }
     echo '</div></div></section>';
 }
 
-/**
- * Bölge Sayfaları için SEO Odaklı Dinamik İçerik Blokları
- */
-function render_seo_blocks($il_name, $ilce_name, $mahalle_name, $klima_suffix, $il_slug, $ilce_slug, $mahalle_slug, $marka_slug) {
-    // Kurumsal veriler
-    $aylar_tr = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-    $current_month = $aylar_tr[date('n') - 1];
-    $current_year = date('Y');
-    
-    // Konum isimlendirmeleri
-    $bolge_adi = $mahalle_name ? "$mahalle_name, $ilce_name" : ($ilce_name ? "$ilce_name, $il_name" : $il_name);
-    $kisa_bolge = $mahalle_name ?: ($ilce_name ?: $il_name);
-    
-    // Tip tespiti: İstatistikleri gerçekçi kılmak için (İl, İlçe, Mahalle)
-    $seed = crc32($il_slug . $ilce_slug . $mahalle_slug . $marka_slug);
-    
-    if ($mahalle_name) {
-        // Mahalle seviyesi
-        $memnuniyet = 98 + ($seed % 2); // 98-99
-        $montaj_sayisi = 4 + ($seed % 6); // 4-9
-    } elseif ($ilce_name) {
-        // İlçe seviyesi
-        $memnuniyet = 96 + ($seed % 3); // 96-98
-        $montaj_sayisi = 18 + ($seed % 28); // 18-45
-    } else {
-        // İl seviyesi
-        $memnuniyet = 95 + ($seed % 3); // 95-97
-        $montaj_sayisi = 120 + ($seed % 80); // 120-199
-    }
-    
-    // Popüler ürünleri seç (Rastgele 3 ürün)
-    $all_products = get_products();
-    $pop_idx = $seed % max(1, count($all_products) - 3);
-    $popular_products = array_slice($all_products, $pop_idx, 3);
-    
-    ?>
-    <div style="margin-top:40px;padding:32px;background:#F7FAFC;border-radius:12px;border:1px solid #E2E8F0;">
-        <!-- Hedef İstatistikler -->
-        <p style="font-size:1rem;color:#2D3748;margin-bottom:20px;">
-            <span class="material-symbols-outlined" style="font-size:1.4rem;vertical-align:middle;color:#48bb78;">verified</span>
-            Bölge memnuniyet oranımız: <strong>%<?= $memnuniyet ?></strong> | Son 30 günde <strong><?= $bolge_adi ?></strong> ve çevresinde <strong><?= $montaj_sayisi ?></strong> yetkili <?= $klima_suffix ?> montaj, servis ve periyodik bakım işlemi başarıyla tamamlandı.
-        </p>
-
-        <!-- İhtiyaç Bağlantısı -->
-        <p style="font-size:1rem;color:#4A5568;margin-bottom:20px;line-height:1.7;">
-            <span class="material-symbols-outlined" style="font-size:1.4rem;vertical-align:middle;color:#4299e1;">apartment</span>
-            <strong><?= $kisa_bolge ?> bölgesinin</strong> iklim koşulları ve mimari yapı grafiği (konut yoğunluğu, ticari plazalar ve sanayi alanları) göz önüne alındığında, yüksek enerji tasarrufu sağlayan <?= $klima_suffix ?> sistemlerimiz; akıllı iklimlendirme sensörleri ve taze hava entegrasyonuyla iç mekan hava kalitenizi maksimize etmek için bölgeye tam uyum sağlar.
-        </p>
-
-        <!-- Kampanya & Dönemsel Etki -->
-        <p style="font-size:1rem;color:#4A5568;margin-bottom:20px;line-height:1.7;">
-            <span class="material-symbols-outlined" style="font-size:1.4rem;vertical-align:middle;color:#ed8936;">campaign</span>
-            <strong>Kampanya — <?= $current_month ?> <?= $current_year ?>:</strong> <?= $kisa_bolge ?> bölgesine özel <?= $klima_suffix ?> donanımlarında avantajlı kampanya fiyatları stoklarımızdadır. Yaz veya kış sezonu yoğunlukları başlamadan, doğrudan keşif randevusu oluşturabilir ve profesyonel mühendislik ekibimizin özel indirimlerinden faydalanabilirsiniz.
-        </p>
-
-        <!-- Bölgesel Satış Argümanı -->
-        <p style="font-size:1rem;color:#4A5568;line-height:1.7;">
-            <span class="material-symbols-outlined" style="font-size:1.4rem;vertical-align:middle;color:#3182ce;">local_shipping</span>
-            <strong>Bölgesel Lojistik & Mühendislik:</strong> <?= $bolge_adi ?> sınırlarındaki oteller, alışveriş merkezleri, fabrika üretim sahaları, plazalar ve villa projeleri için kurumsal kapasite raporlama, ücretsiz AutoCAD borulama çizimi ve anahtar teslim kurulum alanında 7/24 hizmetinizdeyiz. Pendik operasyon merkezimiz üzerinden bölgenize garantili ve çok daha hızlı müdahale gerçekleştiriyoruz.
-        </p>
-    </div>
-
-    <!-- Popüler Tercihler Listesi -->
-    <div style="margin-top:32px;">
-        <h4 style="font-size:1.25rem;color:var(--primary);margin-bottom:16px;">🔥 <?= $kisa_bolge ?> Bölgesindeki Popüler <?= $klima_suffix ?> Modelleri</h4>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <?php foreach ($popular_products as $p): ?>
-            <a href="<?= get_page_url('urun', $p['slug']) ?>" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E2E8F0;padding:8px 16px;border-radius:30px;color:#4A5568;text-decoration:none;font-size:0.9rem;font-weight:600;box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all .2s;" onmouseover="this.style.borderColor='var(--secondary)';this.style.color='var(--secondary)';" onmouseout="this.style.borderColor='#E2E8F0';this.style.color='#4A5568';">
-                <span class="material-symbols-outlined" style="font-size:1.1rem;color:var(--secondary);">trending_up</span> <?= $p['name'] ?>
-            </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <?php
-}

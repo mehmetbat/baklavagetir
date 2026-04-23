@@ -2,8 +2,8 @@
 require_once 'inc/functions.php';
 $active_page = 'iletisim';
 $page_title = 'İletişim — ' . SITE_NAME;
-$page_description = SITE_ADDRESS . '. Telefon: ' . SITE_PHONE . '. VRF klima satış, montaj ve servis için bize ulaşın.';
-$page_canonical = 'iletisim.php';
+$page_description = 'Toptan baklava siparişi için iletişim. ' . SITE_ADDRESS . ' · Telefon: ' . SITE_PHONE . ' · WhatsApp ile hızlı sipariş.';
+$page_canonical = 'iletisim';
 require_once 'inc/header.php';
 render_breadcrumb([['url' => get_page_url('sayfa', 'index.php'), 'text' => 'Ana Sayfa'], ['text' => 'İletişim']]);
 ?>
@@ -19,8 +19,8 @@ render_breadcrumb([['url' => get_page_url('sayfa', 'index.php'), 'text' => 'Ana 
                             <div class="input-group" style="grid-column:span 6;"><label>AD SOYAD</label><input type="text" class="input-control" name="ad" required></div>
                             <div class="input-group" style="grid-column:span 6;"><label>TELEFON</label><input type="tel" class="input-control" name="telefon" required></div>
                             <div class="input-group" style="grid-column:span 6;"><label>E-POSTA</label><input type="email" class="input-control" name="email"></div>
-                            <div class="input-group" style="grid-column:span 6;"><label>KONU</label><select class="input-control" name="konu"><option>VRF Teklif</option><option>Montaj Sorgusu</option><option>Servis & Bakım</option><option>Genel Bilgi</option></select></div>
-                            <div class="input-group" style="grid-column:span 12;"><label>MESAJINIZ</label><textarea class="input-control" name="mesaj" rows="4" placeholder="Projenizle ilgili detayları yazın..."></textarea></div>
+                            <div class="input-group" style="grid-column:span 6;"><label>KONU</label><select class="input-control" name="konu"><option>Toptan Sipariş</option><option>Fiyat Listesi</option><option>Hediyelik Kutu</option><option>Kurumsal Fatura</option><option>Genel Bilgi</option></select></div>
+                            <div class="input-group" style="grid-column:span 12;"><label>MESAJINIZ</label><textarea class="input-control" name="mesaj" rows="4" placeholder="Ürün, miktar ve teslimat detaylarını yazın..."></textarea></div>
                         </div>
                         <button type="submit" class="btn-primary btn-full" style="margin-top:16px;">WHATSAPP İLE GÖNDER</button>
                     </form>

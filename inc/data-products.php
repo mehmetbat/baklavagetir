@@ -154,7 +154,7 @@ $products = [
     // ============ SARMALAR ============
     'ankara-sarma' => [
         'name' => 'Ankara Sarma', 'slug' => 'ankara-sarma',
-        'category' => 'sarmalar', 'image' => 'img/parmak-sarma.webp',
+        'category' => 'sarmalar', 'image' => 'img/yaprak-sarma.webp',
         'price' => '2.400 ₺', 'unit' => 'Kg', 'slice' => '78 dilim',
         'short' => 'İnce yufkaya sarılmış, fıstık dolgulu Ankara usulü sarma baklava.',
         'description' => 'Ankara ekolünün sarma formu — daha küçük dilim, daha yoğun fıstık oranı. Kabuğu çıtır, içi bol dolgulu.',
@@ -310,7 +310,7 @@ $products = [
     ],
     'sobiyet-kaymakli' => [
         'name' => 'Şöbiyet Kaymaklı', 'slug' => 'sobiyet-kaymakli',
-        'category' => 'ozel-cesitler', 'image' => 'img/midye-acik.webp',
+        'category' => 'ozel-cesitler', 'image' => 'img/dilber-dudagi-kapali11.webp',
         'price' => '2.600 ₺', 'unit' => 'Kg', 'slice' => '70 dilim',
         'short' => 'Üçgen formda, kaymak-fıstık dolgulu özel baklava çeşidi.',
         'description' => 'Şöbiyet, üçgen formuyla tanınan özel baklava çeşidi. Geleneksel tarifimizde kaymak ve fıstık birlikte kullanılır.',
@@ -518,7 +518,7 @@ $products = [
     // ============ TEPSİ BAKLAVALAR ============
     'fistikli-tepsi' => [
         'name' => 'Fıstıklı Tepsi Baklava', 'slug' => 'fistikli-tepsi',
-        'category' => 'tepsi-baklavalar', 'image' => 'img/cat-fistikli-tepsi.webp',
+        'category' => 'tepsi-baklavalar', 'image' => 'img/havuc-dilim-kare-tepsi.webp',
         'price' => '5.200 ₺', 'unit' => 'Tepsi', 'slice' => '70-88 dilim',
         'short' => 'Bütün tepsi fıstıklı baklava — etkinlik ve toplu ikram için ideal.',
         'description' => 'Tüm tepsi, kesintisiz tek parça fıstıklı baklava. Etkinlik, gala, düğün ve kurumsal toplu ikram için en prestijli sunum.',
@@ -528,7 +528,7 @@ $products = [
     ],
     'cevizli-tepsi' => [
         'name' => 'Cevizli Tepsi Baklava', 'slug' => 'cevizli-tepsi',
-        'category' => 'tepsi-baklavalar', 'image' => 'img/cat-cevizli-tepsi.webp',
+        'category' => 'tepsi-baklavalar', 'image' => 'img/havuc-dilim-yuvarlak-tepsi.webp',
         'price' => '3.600 ₺', 'unit' => 'Tepsi', 'slice' => '84 dilim',
         'short' => 'Ekonomik tepsi baklava seçeneği — seçme cevizle, sade yağda.',
         'description' => 'Fıstığa alternatif ekonomik tepsi baklava. Seçme cevizle hazırlanır, toplu ikramda maliyet optimizasyonu sağlar.',
@@ -538,7 +538,7 @@ $products = [
     ],
     'karisik-tepsi' => [
         'name' => 'Karışık Tepsi Baklava', 'slug' => 'karisik-tepsi',
-        'category' => 'tepsi-baklavalar', 'image' => 'img/cat-ekstra.webp',
+        'category' => 'tepsi-baklavalar', 'image' => 'img/fistikli-baklava-2.webp',
         'price' => '4.400 ₺', 'unit' => 'Tepsi', 'slice' => 'karışık',
         'short' => 'Tek tepside fıstıklı, cevizli ve çikolatalı karışık baklava sunumu.',
         'description' => 'Misafirlerinizin damak farklılıklarını tek tepside karşılayan karışık sunum. Fıstıklı, cevizli ve çikolatalı çeşitler bir arada.',
@@ -560,7 +560,7 @@ $products = [
     ],
     'hediyelik-karisik' => [
         'name' => 'Hediyelik Karışık Set', 'slug' => 'hediyelik-karisik',
-        'category' => 'hediyelik', 'image' => 'img/cat-hediyelik.webp',
+        'category' => 'hediyelik', 'image' => 'img/baklava-urunler-tepsi.webp',
         'price' => '3.100 ₺', 'unit' => 'Kutu', 'slice' => '1 kg / kutu',
         'short' => 'Fıstıklı, cevizli ve özel çeşitleri bir arada sunan hediyelik kutu.',
         'description' => 'Fıstıklı, cevizli ve özel çeşitlerden oluşan karışık hediyelik kutu. Bayram, yıldönümü ve özel günler için uygun sunum.',

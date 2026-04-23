@@ -22,7 +22,7 @@ render_breadcrumb([['url' => get_page_url('sayfa', 'index.php'), 'text' => 'Ana 
         <h1 style="font-size:clamp(1.8rem, 4vw, 2.5rem); color:var(--primary); line-height:1.2;"><?= $post['title'] ?></h1>
         <p style="color:#4A5568;line-height:1.8;margin-top:24px;font-size:1.1rem;"><?= $post['excerpt'] ?></p>
         <div style="margin-top:40px;padding:32px;background:var(--bg-section);border-radius:16px;border-left:4px solid var(--secondary);">
-            <p style="color:#4A5568;line-height:1.8;">Bu içerik yakında detaylı olarak yayınlanacaktır. VRF klima sistemleri hakkında detaylı bilgi almak için <a href="<?= get_page_url('sayfa', 'iletisim.php') ?>" style="color:var(--secondary);font-weight:700;">bize ulaşın</a> veya <a href="<?= get_page_url('sayfa', 'sss.php') ?>" style="color:var(--secondary);font-weight:700;">SSS sayfamızı</a> inceleyin.</p>
+            <p style="color:#4A5568;line-height:1.8;">Bu içerik yakında detaylı olarak yayınlanacaktır. Toptan baklava siparişi ve fiyat listesi için <a href="<?= SITE_PHONE_LINK ?>" style="color:var(--secondary);font-weight:700;">hemen arayın (<?= SITE_PHONE ?>)</a>, <a href="<?= SITE_WHATSAPP_LINK ?>" style="color:var(--secondary);font-weight:700;">WhatsApp'tan yazın</a> veya <a href="<?= get_page_url('sayfa', 'sss') ?>" style="color:var(--secondary);font-weight:700;">SSS sayfamızı</a> inceleyin.</p>
         </div>
         <div style="margin-top:60px;padding-top:40px;border-top:1px solid #E2E8F0;">
             <h3 style="margin-bottom:20px;font-size:1.5rem;color:var(--primary);">Bunu da Okuyun</h3>

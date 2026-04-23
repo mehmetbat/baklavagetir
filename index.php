@@ -162,17 +162,21 @@ echo '<script type="application/ld+json">' . $org_schema . '</script>';
 <!-- Teslimat Bölgeleri -->
 <section class="section-regions">
     <div class="container">
-        <?php render_section_header('Teslimat Bölgeleri', 'İstanbul içi aynı gün teslimat, diğer illere kargo ile gönderim.', true); ?>
+        <?php render_section_header('Teslimat Bölgeleri', 'İstanbul içi aynı gün teslimat, diğer illere anlaşmalı kargo ile gönderim.', true); ?>
         <div class="grid-12" style="gap:24px;">
             <?php
-            $region_icons = ['istanbul-avrupa' => 'location_city', 'istanbul-anadolu' => 'castle', 'kocaeli' => 'local_shipping', 'bursa' => 'park'];
-            $bolgeler = ['istanbul-avrupa' => 'İstanbul Avrupa', 'istanbul-anadolu' => 'İstanbul Anadolu', 'kocaeli' => 'Kocaeli', 'bursa' => 'Bursa'];
-            foreach ($bolgeler as $slug => $name): ?>
-            <a href="<?= get_bolge_url($slug) ?>" class="region-card" style="grid-column:span 3;">
-                <span class="material-symbols-outlined"><?= $region_icons[$slug] ?></span>
-                <h3><?= $name ?></h3>
-                <p>Aynı Gün Teslimat</p>
-            </a>
+            $bolgeler = [
+                ['name' => 'İstanbul Avrupa', 'icon' => 'location_city', 'note' => 'Aynı Gün Teslimat'],
+                ['name' => 'İstanbul Anadolu', 'icon' => 'castle',        'note' => 'Aynı Gün Teslimat'],
+                ['name' => 'Kocaeli',          'icon' => 'local_shipping','note' => 'Ertesi Gün Kargo'],
+                ['name' => 'Türkiye Geneli',   'icon' => 'map',           'note' => 'Anlaşmalı Kargo'],
+            ];
+            foreach ($bolgeler as $b): ?>
+            <div class="region-card" style="grid-column:span 3;">
+                <span class="material-symbols-outlined"><?= $b['icon'] ?></span>
+                <h3><?= $b['name'] ?></h3>
+                <p><?= $b['note'] ?></p>
+            </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -184,7 +188,7 @@ echo '<script type="application/ld+json">' . $org_schema . '</script>';
         <?php render_section_header('Kimler İçin Üretiyoruz?', 'Her sektörün ikram standardı farklıdır; her birine özel çözümlerimiz var.'); ?>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
             <?php foreach (array_slice(get_sectors(), 0, 8) as $key => $s): ?>
-            <a href="kurumsal.php#<?= $key ?>" class="sector-card">
+            <a href="<?= get_page_url('sayfa', 'sektorler') ?>#<?= $key ?>" class="sector-card">
                 <span class="material-symbols-outlined"><?= $s['icon'] ?></span>
                 <h4><?= $s['name'] ?></h4>
             </a>
@@ -210,7 +214,7 @@ echo '<script type="application/ld+json">' . $org_schema . '</script>';
             <?php endforeach; ?>
         </div>
         <div style="text-align:center;margin-top:32px;">
-            <a href="<?= get_page_url('sayfa', 'referanslar') ?>" class="btn-outline">Tüm Referanslarımız →</a>
+            <a href="<?= get_page_url('sayfa', 'sektorler') ?>" class="btn-outline">Müşteri Segmentlerimizi Gör →</a>
         </div>
     </div>
 </section>

@@ -2,25 +2,26 @@
 require_once 'inc/functions.php';
 require_once 'inc/data-content.php';
 $active_page = 'hizmetler';
-$page_title = 'VRF Klima Hizmetleri — Montaj, Servis, Projelendirme | ' . SITE_NAME;
-$page_description = 'VRF klima montaj, servis, bakım, ücretsiz keşif ve 3D projelendirme hizmetleri. Pendik merkezli sertifikalı ekiplerimizle profesyonel çözümler.';
-$page_canonical = 'hizmetler.php';
+$page_title = 'Hizmetlerimiz — Toptan Tedarik, Teslimat, Hediyelik Kutu | ' . SITE_NAME;
+$page_description = 'Toptan baklava tedariki, hızlı teslimat, hediyelik kutu ve kurumsal faturalı satış hizmetlerimiz. 10 kategori, 47 çeşit baklava ve tatlı.';
+$page_canonical = 'hizmetler';
 require_once 'inc/header.php';
 render_breadcrumb([['url' => 'index.php', 'text' => 'Ana Sayfa'], ['text' => 'Hizmetler']]);
 ?>
 
 <section style="padding:80px 0;">
     <div class="container">
-        <?php render_section_header('Çözüm ve Hizmetlerimiz', 'Profesyonel VRF iklimlendirme hizmetleri.'); ?>
+        <?php render_section_header('Hizmetlerimiz', 'Toptan ve kurumsal baklava tedariki için sunduğumuz hizmetler.'); ?>
         <?php foreach (get_services() as $s): ?>
         <div class="service-block" id="<?= $s['slug'] ?>">
             <div class="grid-12" style="gap:40px;align-items:flex-start;">
                 <div style="grid-column:span 7;">
                     <div class="service-icon-lg"><span class="material-symbols-outlined"><?= $s['icon'] ?></span></div>
                     <h2><?= $s['name'] ?></h2>
-                    <p style="color:#4A5568;line-height:1.8;margin-top:16px;"><?= $s['description'] ?></p>
-                    <div style="margin-top:24px;">
-                        <a href="<?= get_page_url('sayfa', 'teklif-al.php') ?>" class="btn-primary">Bu Hizmet İçin Teklif Al</a>
+                    <p style="color:#4A5568;line-height:1.8;margin-top:16px;"><?= $s['short'] ?></p>
+                    <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;">
+                        <a href="<?= SITE_PHONE_LINK ?>" class="btn-primary"><span class="material-symbols-outlined" style="vertical-align:middle;margin-right:6px;">call</span>Hemen Ara</a>
+                        <a href="<?= SITE_WHATSAPP_LINK ?>" class="btn-whatsapp"><span class="material-symbols-outlined" style="vertical-align:middle;margin-right:6px;">chat</span>WhatsApp</a>
                     </div>
                 </div>
                 <div style="grid-column:span 5;">
@@ -41,9 +42,12 @@ render_breadcrumb([['url' => 'index.php', 'text' => 'Ana Sayfa'], ['text' => 'Hi
 
 <section class="section-cta-banner">
     <div class="container" style="text-align:center;">
-        <h2 style="color:white;margin-bottom:16px;">Projeniz İçin Doğru Hizmeti mi Arıyorsunuz?</h2>
-        <p style="color:rgba(255,255,255,.9);margin-bottom:24px;">Uzman mühendislerimiz projenizi değerlendirsin. Ücretsiz keşif ve teklif.</p>
-        <a href="<?= get_page_url('sayfa', 'teklif-al.php') ?>" class="btn-primary btn-lg" style="background:white;color:var(--primary);">Ücretsiz Keşif İste</a>
+        <h2 style="color:white;margin-bottom:16px;">Toptan Sipariş için Bize Ulaşın</h2>
+        <p style="color:rgba(255,255,255,.9);margin-bottom:24px;">Fiyat listesi, çeşit detayı ve sipariş onayı için dakikalar içinde dönüş yapıyoruz.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="<?= SITE_PHONE_LINK ?>" class="btn-primary btn-lg" style="background:white;color:var(--primary);"><span class="material-symbols-outlined" style="vertical-align:middle;margin-right:6px;">call</span><?= SITE_PHONE ?></a>
+            <a href="<?= SITE_WHATSAPP_LINK ?>" class="btn-whatsapp btn-lg"><span class="material-symbols-outlined" style="vertical-align:middle;margin-right:6px;">chat</span>WhatsApp'tan Yaz</a>
+        </div>
     </div>
 </section>
 

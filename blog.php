@@ -2,15 +2,15 @@
 require_once 'inc/functions.php';
 require_once 'inc/data-content.php';
 $active_page = 'blog';
-$page_title = 'VRF Klima Blog — Rehberler ve Teknik İçerikler | ' . SITE_NAME;
-$page_description = 'VRF klima sistemleri hakkında teknik rehberler, karşılaştırmalar ve sektörel içerikler.';
-$page_canonical = 'blog.php';
+$page_title = 'Blog — Baklava Rehberleri ve Kurumsal İçerikler | ' . SITE_NAME;
+$page_description = 'Baklava çeşitleri, kurumsal ikram, hediyelik kutu, bayram tedariği ve toptan baklava siparişi rehberleri.';
+$page_canonical = 'blog';
 require_once 'inc/header.php';
 render_breadcrumb([['url' => 'index.php', 'text' => 'Ana Sayfa'], ['text' => 'Blog']]);
 ?>
 <section style="padding:80px 0;">
     <div class="container">
-        <?php render_section_header('VRF Klima Blog', 'Teknik rehberler, sektörel içerikler ve VRF hakkında bilmeniz gerekenler.'); ?>
+        <?php render_section_header('Baklava Getir Blog', 'Baklava çeşitleri, kurumsal ikram, hediyelik ve toptan sipariş rehberleri.'); ?>
         <div class="grid-12" style="gap:24px;">
             <?php foreach (get_blog_posts() as $post): ?>
             <div class="blog-card" style="grid-column:span 6;">
