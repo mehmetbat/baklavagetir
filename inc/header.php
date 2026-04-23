@@ -30,9 +30,9 @@
     <!-- Üst Bilgi Barı -->
     <div class="top-bar">
         <div class="container top-bar-inner">
-            <span>Toptan fiyat listesi ve sipariş için bizi arayın: <?= SITE_PHONE ?></span>
+            <span>Toptan fiyat listesi ve sipariş için bizi arayın: <a href="<?= SITE_PHONE_LINK ?>" style="color:inherit;font-weight:700;text-decoration:none;"><?= SITE_PHONE ?></a></span>
             <span class="top-bar-right">
-                <span class="top-bar-badge">WhatsApp ile Hızlı Sipariş</span>
+                <a href="<?= SITE_WHATSAPP_LINK ?>" class="top-bar-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span class="material-symbols-outlined" style="font-size:16px;">chat</span>WhatsApp ile Hızlı Sipariş</a>
                 <a href="<?= SITE_PHONE_LINK ?>">Hemen Ara</a>
             </span>
         </div>
