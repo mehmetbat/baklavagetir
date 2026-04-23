@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /inc/
+Disallow: /urun-detay.php
+Disallow: /blog-detay.php
+Disallow: /sitemap.php
+
+Sitemap: https://baklavagetir.com/sitemap.xml

@@ -1,0 +1,53 @@
+RewriteEngine On
+RewriteBase /
+
+# Dosya veya klasör gerçekten varsa kuralı işletme (CSS, JS, img geçer)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Kategori filtreli ürünler: /kategori/hediyelik -> urunler.php?kategori=hediyelik
+RewriteRule ^kategori/([a-z0-9-]+)/?$ urunler.php?kategori=$1 [L,QSA]
+
+# Ürün Detay: /urun/fistikli-baklava -> urun-detay.php?slug=fistikli-baklava
+RewriteRule ^urun/([a-z0-9-]+)/?$ urun-detay.php?slug=$1 [L,QSA]
+
+# Blog Detay: /blog/yazi-slug -> blog-detay.php?slug=yazi-slug
+RewriteRule ^blog/([a-z0-9-]+)/?$ blog-detay.php?slug=$1 [L,QSA]
+
+# Trailing slash kaldır (canonical)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# index.php -> /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
+
+# .php uzantısını URL'den gizle: /iletisim -> iletisim.php
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.php
+RewriteRule ^([^\.]+)\.php$ /$1 [R=301,L]
+
+# Standart .php Gizleme (internal rewrite)
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [L,QSA]
+
+# Güvenlik: hassas dosyaları engelle
+<FilesMatch "\.(env|log|json|md|lock|sh)$">
+    Require all denied
+</FilesMatch>
+RedirectMatch 403 ^/inc/
+
+# Caching - statik dosyalar
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/xml
+</IfModule>
